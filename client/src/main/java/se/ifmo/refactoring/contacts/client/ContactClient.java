@@ -15,9 +15,12 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 public class ContactClient implements ContactService {
 
   private final WebTarget webTarget;
+  private final String basicAuth;
+  private static final String AUTHORIZATION_KEY = "Authorization";
 
-  public ContactClient(final String host) {
+  public ContactClient(final String host, final String basicAuth) {
     this.webTarget = ClientBuilder.newClient().target(host + "/api/contacts");
+    this.basicAuth = basicAuth;
   }
 
   @Override
@@ -28,6 +31,7 @@ public class ContactClient implements ContactService {
         .queryParam("phone-number", contactFilter.getPhoneNumber())
         .queryParam("email", contactFilter.getEmail())
         .request(APPLICATION_JSON_TYPE)
+            .header(AUTHORIZATION_KEY, basicAuth)
         .get(new GenericType<List<Contact>>() {});
   }
 

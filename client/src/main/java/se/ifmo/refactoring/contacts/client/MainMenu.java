@@ -17,7 +17,7 @@ public class MainMenu {
   private final ContactService contactService;
 
   public MainMenu(
-      final Scanner scanner, final PrintWriter writer, final ContactService contactService) {
+          final Scanner scanner, final PrintWriter writer, final ContactService contactService) {
     this.scanner = scanner;
     this.writer = writer;
     this.contactService = contactService;
@@ -61,7 +61,7 @@ public class MainMenu {
           writer.println("Goodbye!");
           return;
         default:
-          throw new IllegalArgumentException("Unknown state for command " + menuCommand);
+          writer.println("Unknown state for command " + menuCommand);
       }
       printMenu(false);
     }
